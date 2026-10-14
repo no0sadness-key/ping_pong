@@ -39,6 +39,10 @@ left = Player('платформа1.png', 2, 10, 200, 20, 180)
 right = Player('платформа2.png', 2, 670, 200, 20, 180)
 ball = GameSprite('мяч.png', 3, 300, 200, 50,50)
 
+font1 = font.Font(None, 35)
+lose1 = font1.render('PLAYER 1 LOSE !', True,(180,0,0))
+lose2 = font1.render('PLAYER 2 LOSE !', True,(180,0,0))
+
 
 while game:
     for i in event.get():
@@ -56,5 +60,9 @@ while game:
         speed_y *= -1
     if sprite.collide_rect(left, ball) or sprite.collide_rect(right, ball):
         speed_x *= -1
+    if ball.rect.x < 0:
+        window.blit(lose1, (200, 200))
+    if ball.rect.x > 650:
+        window.blit(lose2, (200, 200))
     display.update()
     clock.tick(60)
